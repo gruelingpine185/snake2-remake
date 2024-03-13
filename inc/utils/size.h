@@ -50,6 +50,17 @@ namespace s2 {
         T _w;
         T _h;
     };
+
+
+    template <typename T>
+    constexpr bool operator== (const size<T>& _l, const size<T>& _r) {
+        return ((_l.w() == _r.w()) && (_l.h() == _r.h()));
+    }
+
+    template <typename T>
+    constexpr bool operator!= (const size<T>& _l, const size<T>& _r) {
+        return (!(_l == _r));
+    }
 }
 
 #endif // S2_SIZE_H
