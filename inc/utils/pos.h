@@ -31,6 +31,22 @@ namespace s2 {
 
         ~pos() noexcept {}
 
+        value_type x() noexcept {
+            return this->_x;
+        }
+
+        const value_type x() const noexcept {
+            return this->_x;
+        }
+
+        value_type y() noexcept {
+            return this->_y;
+        }
+
+        const value_type y() const noexcept {
+            return this->_y;
+        }
+
         constexpr pos& operator= (const pos<T>& _pos) noexcept {
             if(*this == _pos) return *this;
 
