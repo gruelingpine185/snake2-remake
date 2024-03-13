@@ -30,6 +30,22 @@ namespace s2 {
         constexpr size() noexcept {}
 
         ~size() noexcept {}
+
+        value_type w() noexcept {
+            return this->_w;
+        }
+
+        const value_type w() const noexcept {
+            return this->_w;
+        }
+
+        value_type h() noexcept {
+            return this->_h;
+        }
+
+        const value_type h() const noexcept {
+            return this->_h;
+        }
     private:
         T _w;
         T _h;
