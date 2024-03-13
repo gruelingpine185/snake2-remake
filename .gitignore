@@ -1,0 +1,7 @@
+# project
+bin/
+
+# bear
+.cache/
+compile_commands.json
+
