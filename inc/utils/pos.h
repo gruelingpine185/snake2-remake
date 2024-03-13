@@ -54,10 +54,64 @@ namespace s2 {
             this->_x = _pos.x();
             return *this;
         }
+
+        constexpr pos& operator+= (const pos<T>& _pos) noexcept {
+            this->_x += _pos._x;
+            this->_y += _pos._y;
+            return *this;
+        }
+
+        constexpr pos& operator-= (const pos<T>& _pos) noexcept {
+            *this += -_pos;
+            return *this;
+        }
     private:
         T _x;
         T _y;
     };
+
+
+    template <typename T>
+    constexpr bool operator== (const pos<T>& _l, const pos<T>& _r) {
+        return ((_l.x() == _r.x()) && (_l.y() == _r.y()));
+    }
+
+    template <typename T>
+    constexpr bool operator!= (const pos<T>& _l, const pos<T>& _r) {
+        return (!(_l == _r));
+    }
+
+    template <
+        typename T,
+        typename = typename std::enable_if_t<std::is_arithmetic_v<T>>
+    >
+    constexpr pos<T> operator* (const pos<T>& _l, const pos<T>& _r) {
+        return ((_l.x() * _r.x()), (_l.y() * _r.y()));
+    }
+
+    template <
+        typename T,
+        typename = typename std::enable_if_t<std::is_arithmetic_v<T>>
+    >
+    constexpr pos<T> operator/ (const pos<T>& _l, const pos<T>& _r) {
+        return ((_l.x() / _r.x()), (_l.y() / _r.y()));
+    }
+
+    template <
+        typename T,
+        typename = typename std::enable_if_t<std::is_arithmetic_v<T>>
+    >
+    constexpr pos<T> operator+ (const pos<T>& _l, const pos<T>& _r) {
+        return ((_l.x() + _r.x()), (_l.y() * _r.y()));
+    }
+
+    template <
+        typename T,
+        typename = typename std::enable_if_t<std::is_arithmetic_v<T>>
+    >
+    constexpr pos<T> operator- (const pos<T>& _l, const pos<T>& _r) {
+        return ((_l.x() - _r.x()), (_l.y() - _r.y()));
+    }
 }
 
 #endif // S2_SIZE_H
