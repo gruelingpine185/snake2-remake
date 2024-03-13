@@ -23,6 +23,12 @@ namespace s2 {
         window(const window& _win) noexcept = delete;
         window() noexcept;
         ~window() noexcept;
+        bool should_close() noexcept;
+        std::string& title() noexcept;
+        const std::string& title() const noexcept;
+        s2::size<int>& size() noexcept;
+        const s2::size<int>& size() const noexcept;
+
         window& operator= (const window& _win) noexcept = delete;
     private:
         SDL_Window* _window;

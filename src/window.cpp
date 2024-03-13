@@ -13,4 +13,24 @@ namespace s2 {
         _is_resizable(false), _should_close(false) {}
 
     window::~window() noexcept {}
+
+    bool window::should_close() noexcept {
+        return this->_should_close;
+    }
+
+    std::string& window::title() noexcept {
+        return this->_title;
+    }
+
+    const std::string& window::title() const noexcept {
+        return this->_title;
+    }
+
+    s2::size<int>& window::size() noexcept {
+        return this->_size;
+    }
+
+    const s2::size<int>& window::size() const noexcept {
+        return this->_size;
+    }
 }
