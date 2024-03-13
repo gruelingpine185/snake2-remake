@@ -5,3 +5,6 @@ bin/
 .cache/
 compile_commands.json
 
+# macos
+.DS_Store
+
