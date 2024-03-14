@@ -1,5 +1,5 @@
-#ifndef S2_SIZE_H
-#define S2_SIZE_H
+#ifndef S2_POS_H
+#define S2_POS_H
 
 
 #include <type_traits>
@@ -114,4 +114,4 @@ namespace s2 {
     }
 }
 
-#endif // S2_SIZE_H
+#endif // S2_POS_H
