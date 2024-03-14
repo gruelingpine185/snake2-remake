@@ -102,7 +102,7 @@ namespace s2 {
         typename = typename std::enable_if_t<std::is_arithmetic_v<T>>
     >
     constexpr pos<T> operator+ (const pos<T>& _l, const pos<T>& _r) {
-        return ((_l.x() + _r.x()), (_l.y() * _r.y()));
+        return ((_l.x() + _r.x()), (_l.y() + _r.y()));
     }
 
     template <

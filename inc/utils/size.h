@@ -114,7 +114,7 @@ namespace s2 {
         typename = typename std::enable_if_t<std::is_arithmetic_v<T>>
     >
     constexpr size<T> operator+ (const size<T>& _l, const size<T>& _r) {
-        return ((_l.w() + _r.w()), (_l.h() * _r.w()));
+        return ((_l.w() + _r.w()), (_l.h() + _r.w()));
     }
 
     template <
