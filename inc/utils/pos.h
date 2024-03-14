@@ -18,14 +18,14 @@ namespace s2 {
     public:
         using value_type = T;
     public:
-        constexpr pos(const value_type _w, const value_type _h) noexcept:
-            _x(_w), _y(_h) {}
+        constexpr pos(const value_type _x, const value_type _y) noexcept:
+            _x(_x), _y(_y) {}
 
         constexpr pos(const value_type _n) noexcept:
             _x(_n), _y(_n) {}
 
-        constexpr pos(const pos& _size) noexcept:
-            _x(_size._w), _y(_size._h) {}
+        constexpr pos(const pos& _pos) noexcept:
+            _x(_pos._x), _y(_pos._y) {}
 
         constexpr pos() noexcept {}
 
