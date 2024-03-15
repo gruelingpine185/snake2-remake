@@ -55,7 +55,7 @@ namespace s2 {
             }
 
             constexpr bool operator!= (const iterator& _iter) const noexcept {
-                return (!(this->_ptr == _iter));
+                return (!(this->_ptr == _iter._ptr));
             }
 
             iterator& operator++ () {
