@@ -2,8 +2,11 @@
 #define S2_ARRAY_H
 
 
+#include <assert.h>
 #include <cstddef>
 #include <iterator>
+#include <initializer_list>
+#include <algorithm>
 
 
 namespace s2 {
@@ -115,6 +118,36 @@ namespace s2 {
         private:
             pointer _ptr;
         };
+
+        array(std::initializer_list<value_type> _il) {
+            assert(_il.size() < this->size() &&
+                   "Too many elements in initializer list");
+
+            size_type i = 0;
+            for(value_type value: _il) {
+                if(i == this->size()) break;
+
+                this->_data[i++] = value;
+            }
+
+            this->_cap = i;
+        }
+
+        array(reference _value) noexcept:
+            _data(std::fill(this->begin(), this->end(), _value)),
+            _cap(this->size() - 1) {}
+        
+        array(const array& _array) noexcept:
+            _data(std::copy(_array->begin(), _array->end(), this->begin())),
+            _cap(_array._cap) {}
+
+        array() noexcept:
+            _data{}, _cap{} {}
+
+        ~array() {}
+    private:
+        value_type _data[N];
+        size_type _cap;
     };
 }
 
