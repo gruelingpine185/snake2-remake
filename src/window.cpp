@@ -54,8 +54,9 @@ namespace s2 {
                                              nullptr,
                                              SDL_RENDERER_PRESENTVSYNC);
         if(!this->_renderer) return false;
+        if(!this->clear_screen()) return false;
 
-        return this->clear_screen();
+        return this->render();
     }
 
     bool window::show() noexcept {
