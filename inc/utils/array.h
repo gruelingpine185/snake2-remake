@@ -20,6 +20,15 @@ namespace s2 {
         using pointer = value_type*;
         using const_pointer = const pointer;
         using size_type = std::size_t;
+    public:
+        class iterator {
+        public:
+            using reference = array::reference;
+            using pointer = array::pointer;
+            using size_type = array::size_type;
+            using difference_type = std::ptrdiff_t;
+            using iterator_category = std::random_access_iterator_tag;
+        };
     };
 }
 
