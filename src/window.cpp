@@ -42,7 +42,15 @@ namespace s2 {
                                          (this->_is_resizable)?
                                             SDL_WINDOW_RESIZABLE:
                                             0);
-        return (this->_window != nullptr);
+
+        if(!this->_window) return false;
+
+        this->_renderer = SDL_CreateRenderer(this->_window,
+                                             nullptr,
+                                             SDL_RENDERER_PRESENTVSYNC);
+        if(!this->_renderer) return false;
+
+        return this->clear_screen();
     }
 
     bool window::show() noexcept {
