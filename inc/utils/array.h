@@ -147,6 +147,22 @@ namespace s2 {
         ~array() {}
 
 
+        constexpr size_type size() const noexcept {
+            return N;
+        }
+
+        const_pointer data() const noexcept {
+            return this->_data;
+        }
+
+        pointer data() noexcept {
+            return this->_data;
+        }
+
+        size_type cap() const noexcept {
+            return this->_cap;
+        }
+
         iterator begin() noexcept {
             return iterator(this->_data);
         }
