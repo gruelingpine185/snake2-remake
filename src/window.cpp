@@ -81,6 +81,10 @@ namespace s2 {
         if(_event.type == SDL_EVENT_QUIT) this->_should_close = true;
     }
 
+    SDL_Renderer*& window::renderer() noexcept {
+        return this->_renderer;
+    }
+
     std::string& window::title() noexcept {
         return this->_title;
     }
