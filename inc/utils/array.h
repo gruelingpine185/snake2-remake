@@ -39,6 +39,79 @@ namespace s2 {
                 _ptr(nullptr) {}
 
             ~iterator() noexcept {}
+
+            iterator& operator= (const iterator& _iter) {
+                if(*this == _iter) return *this;
+
+                this->_ptr = _iter._ptr;
+                return *this;
+            }
+
+            constexpr bool operator== (const iterator& _iter) const noexcept {
+                return (this->_ptr == _iter._ptr);
+            }
+
+            constexpr bool operator!= (const iterator& _iter) const noexcept {
+                return (!(this->_ptr == _iter));
+            }
+
+            iterator& operator++ () {
+                this->_ptr++;
+                return *this;
+            }
+
+            iterator& operator++ (int _unused) {
+                static_cast<void>(_unused);
+                iterator iter = *this;
+                ++(*this);
+                return iter;
+            }
+
+            iterator& operator-- () {
+                this->_ptr--;
+                return *this;
+            }
+
+            iterator& operator-- (int _unused) {
+                static_cast<void>(_unused);
+                iterator iter = *this;
+                --(*this);
+                return iter;
+            }
+
+            iterator operator+ (const size_type _offset) const {
+                iterator iter = *this;
+                iter._ptr += _offset;
+                return iter;
+            }
+
+            iterator operator- (const size_type _offset) const {
+                iterator iter = *this;
+                iter._ptr -= _offset;
+                return iter;
+            }
+
+            iterator& operator+= (const size_type _offset) {
+                this->_ptr += _offset;
+                return *this;
+            }
+
+            iterator& operator-= (const size_type _offset) {
+                this->_ptr -= _offset;
+                return *this;
+            }
+
+            reference operator* () const {
+                return *this->_ptr;
+            }
+
+            pointer operator-> () const {
+                return this->_ptr;
+            }
+
+            reference operator[] (const size_type _offset) const {
+                return this->_data[_offset];
+            }
         private:
             pointer _ptr;
         };
