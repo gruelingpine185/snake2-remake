@@ -71,11 +71,11 @@ namespace s2 {
             return false;
         };
 
-        return (SDL_RenderClear(this->_renderer) < 0);
+        return (SDL_RenderClear(this->_renderer) == 0);
     }
 
     bool window::render() noexcept {
-        return (SDL_RenderPresent(this->_renderer) < 0);
+        return (SDL_RenderPresent(this->_renderer) == 0);
     }
 
     bool window::should_close() noexcept {
