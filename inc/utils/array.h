@@ -203,7 +203,7 @@ namespace s2 {
         }
 
         iterator end() noexcept {
-            return iterator(this->_data[this->size()]);
+            return iterator(&this->_data[this->size()]);
         }
 
         iterator rend() noexcept {
