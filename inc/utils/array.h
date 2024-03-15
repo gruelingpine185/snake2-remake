@@ -146,6 +146,37 @@ namespace s2 {
 
         ~array() {}
 
+        reference at(const size_type _offset) noexcept {
+            assert((_offset > 0) &&(_offset >= this->size()) &&
+                    "Offset is out of range");            
+            return this->_data[_offset];
+        }
+
+        const_reference at(const size_type _offset) const noexcept {
+            assert((_offset > 0) &&(_offset >= this->size()) &&
+                    "Offset is out of range");            
+            return this->_data[_offset];
+        }
+
+        reference front() noexcept {
+            return *this->begin();
+        }
+
+        const_reference front() const noexcept {
+            return *this->begin();
+        }
+
+        reference back() noexcept {
+            return *std::prev(this->end());
+        }
+
+        const_reference back() const noexcept {
+            return *std::prev(this->end());
+        }
+
+        bool constexpr empty() const noexcept {
+            return (this->begin() == this->end());
+        }
 
         constexpr size_type size() const noexcept {
             return N;
