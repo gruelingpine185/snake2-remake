@@ -22,7 +22,12 @@ namespace s2 {
         _window(nullptr), _renderer(nullptr), _title{},
         _size(800, 600), _is_resizable(false), _should_close(false) {}
 
-    window::~window() noexcept {}
+    window::~window() noexcept {
+        SDL_DestroyRenderer(this->_renderer);
+        SDL_DestroyWindow(this->_window);
+        SDL_QuitSubSystem(enabled_sdl_flags);
+        SDL_Quit();
+    }
 
     bool window::create(const std::string& _title,
                         const s2::size<int>& _size,
