@@ -28,6 +28,19 @@ namespace s2 {
             using size_type = array::size_type;
             using difference_type = std::ptrdiff_t;
             using iterator_category = std::random_access_iterator_tag;
+        public:
+            iterator(const pointer _ptr):
+                _ptr(_ptr) {}
+
+            iterator(const iterator& _iter):
+                _ptr(_iter._ptr) {}
+
+            iterator() noexcept:
+                _ptr(nullptr) {}
+
+            ~iterator() noexcept {}
+        private:
+            pointer _ptr;
         };
     };
 }
