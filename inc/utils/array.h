@@ -145,6 +145,14 @@ namespace s2 {
             _data{}, _cap{} {}
 
         ~array() {}
+
+        reference operator[] (size_type _offset) noexcept {
+            return this->_data[_offset];
+        }
+
+        const_reference operator[] (size_type _offset) const noexcept {
+            return this->_data[_offset];
+        }
     private:
         value_type _data[N];
         size_type _cap;
