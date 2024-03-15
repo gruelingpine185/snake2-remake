@@ -8,6 +8,7 @@
 
 
 struct SDL_Window;
+struct SDL_Renderer;
 union SDL_Event;
 
 
@@ -40,6 +41,7 @@ namespace s2 {
         window& operator= (const window& _win) noexcept = delete;
     private:
         SDL_Window* _window;
+        SDL_Renderer* _renderer;
         std::string _title;
         s2::size<int> _size;
         bool _is_resizable;
