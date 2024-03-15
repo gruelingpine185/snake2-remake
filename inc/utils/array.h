@@ -146,6 +146,23 @@ namespace s2 {
 
         ~array() {}
 
+
+        iterator begin() noexcept {
+            return iterator(this->_data);
+        }
+
+        iterator rbegin() noexcept {
+            return iterator(this->end());
+        }
+
+        iterator end() noexcept {
+            return iterator(this->_data[this->size()]);
+        }
+
+        iterator rend() noexcept {
+            return iterator(this->begin());
+        }
+
         reference operator[] (size_type _offset) noexcept {
             return this->_data[_offset];
         }
