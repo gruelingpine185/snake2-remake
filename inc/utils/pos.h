@@ -27,7 +27,8 @@ namespace s2 {
         constexpr pos(const pos& _pos) noexcept:
             _x(_pos._x), _y(_pos._y) {}
 
-        constexpr pos() noexcept {}
+        constexpr pos() noexcept:
+            _x(static_cast<T>(0)), _y(static_cast<T>(0)) {}
 
         ~pos() noexcept {}
 
