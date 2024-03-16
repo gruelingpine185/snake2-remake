@@ -215,6 +215,10 @@ namespace s2 {
             return iterator(this->begin());
         }
 
+        iterator cap_end() noexcept {
+            return iterator(&this->_data[this->cap() + 1]);
+        }
+
         reference operator[] (size_type _offset) noexcept {
             return this->_data[_offset];
         }
