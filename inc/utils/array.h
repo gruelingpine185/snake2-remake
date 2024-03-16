@@ -21,11 +21,12 @@ namespace s2 {
     public:
         using reference = typename array<T, N>::reference;
         using pointer = typename array<T, N>::pointer;
+        using const_pointer = typename array<T, N>::const_pointer;
         using size_type = typename array<T, N>::size_type;
         using difference_type = typename std::ptrdiff_t;
         using iterator_category = std::random_access_iterator_tag;
     public:
-        array_iterator(const pointer _ptr):
+        array_iterator(const_pointer _ptr):
             _ptr(_ptr) {}
 
         array_iterator(const array_iterator& _iter):
