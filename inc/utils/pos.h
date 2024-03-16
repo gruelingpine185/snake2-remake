@@ -52,7 +52,7 @@ namespace s2 {
             if(*this == _pos) return *this;
 
             this->_x = _pos.x();
-            this->_x = _pos.x();
+            this->_y = _pos.y();
             return *this;
         }
 
