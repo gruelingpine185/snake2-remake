@@ -12,7 +12,105 @@
 namespace s2 {
     template <typename T, std::size_t N>
     class array;
+    template <typename T, std::size_t N>
+    class array_iterator;
 
+
+    template <typename T, std::size_t N>
+    class array_iterator {
+    public:
+        using reference = typename array<T, N>::reference;
+        using pointer = typename array<T, N>::pointer;
+        using size_type = typename array<T, N>::size_type;
+        using difference_type = typename std::ptrdiff_t;
+        using iterator_category = std::random_access_iterator_tag;
+    public:
+        array_iterator(const pointer _ptr):
+            _ptr(_ptr) {}
+
+        array_iterator(const array_iterator& _iter):
+            _ptr(_iter._ptr) {}
+
+        array_iterator() noexcept:
+            _ptr(nullptr) {}
+
+        ~array_iterator() noexcept {}
+
+        array_iterator& operator= (const array_iterator& _iter) {
+            if(*this == _iter) return *this;
+
+            this->_ptr = _iter._ptr;
+            return *this;
+        }
+
+        constexpr bool operator== (const array_iterator& _iter) const noexcept {
+            return (this->_ptr == _iter._ptr);
+        }
+
+        constexpr bool operator!= (const array_iterator& _iter) const noexcept {
+            return (!(this->_ptr == _iter._ptr));
+        }
+
+        array_iterator& operator++ () {
+            this->_ptr++;
+            return *this;
+        }
+
+        array_iterator& operator++ (int _unused) {
+            static_cast<void>(_unused);
+           array_iterator iter = *this;
+            ++(*this);
+            return *this;
+        }
+
+        array_iterator& operator-- () {
+            this->_ptr--;
+            return *this;
+        }
+
+        array_iterator& operator-- (int _unused) {
+            static_cast<void>(_unused);
+           array_iterator iter = *this;
+            --(*this);
+            return iter;
+        }
+
+       array_iterator operator+ (const size_type _offset) const {
+           array_iterator iter = *this;
+            iter._ptr += _offset;
+            return iter;
+        }
+
+       array_iterator operator- (const size_type _offset) const {
+           array_iterator iter = *this;
+            iter._ptr -= _offset;
+            return iter;
+        }
+
+        array_iterator& operator+= (const size_type _offset) {
+            this->_ptr += _offset;
+            return *this;
+        }
+
+        array_iterator& operator-= (const size_type _offset) {
+            this->_ptr -= _offset;
+            return *this;
+        }
+
+        reference operator* () const {
+            return *this->_ptr;
+        }
+
+        pointer operator-> () const {
+            return this->_ptr;
+        }
+
+        reference operator[] (const size_type _offset) const {
+            return this->_data[_offset];
+        }
+    private:
+        pointer _ptr;
+    };
 
     template <typename T, std::size_t N>
     class array {
@@ -23,102 +121,8 @@ namespace s2 {
         using pointer = value_type*;
         using const_pointer = const pointer;
         using size_type = std::size_t;
+        using iterator = array_iterator<T, N>;
     public:
-        class iterator {
-        public:
-            using reference = array::reference;
-            using pointer = array::pointer;
-            using size_type = array::size_type;
-            using difference_type = std::ptrdiff_t;
-            using iterator_category = std::random_access_iterator_tag;
-        public:
-            iterator(const pointer _ptr):
-                _ptr(_ptr) {}
-
-            iterator(const iterator& _iter):
-                _ptr(_iter._ptr) {}
-
-            iterator() noexcept:
-                _ptr(nullptr) {}
-
-            ~iterator() noexcept {}
-
-            iterator& operator= (const iterator& _iter) {
-                if(*this == _iter) return *this;
-
-                this->_ptr = _iter._ptr;
-                return *this;
-            }
-
-            constexpr bool operator== (const iterator& _iter) const noexcept {
-                return (this->_ptr == _iter._ptr);
-            }
-
-            constexpr bool operator!= (const iterator& _iter) const noexcept {
-                return (!(this->_ptr == _iter._ptr));
-            }
-
-            iterator& operator++ () {
-                this->_ptr++;
-                return *this;
-            }
-
-            iterator& operator++ (int _unused) {
-                static_cast<void>(_unused);
-                iterator iter = *this;
-                ++(*this);
-                return iter;
-            }
-
-            iterator& operator-- () {
-                this->_ptr--;
-                return *this;
-            }
-
-            iterator& operator-- (int _unused) {
-                static_cast<void>(_unused);
-                iterator iter = *this;
-                --(*this);
-                return iter;
-            }
-
-            iterator operator+ (const size_type _offset) const {
-                iterator iter = *this;
-                iter._ptr += _offset;
-                return iter;
-            }
-
-            iterator operator- (const size_type _offset) const {
-                iterator iter = *this;
-                iter._ptr -= _offset;
-                return iter;
-            }
-
-            iterator& operator+= (const size_type _offset) {
-                this->_ptr += _offset;
-                return *this;
-            }
-
-            iterator& operator-= (const size_type _offset) {
-                this->_ptr -= _offset;
-                return *this;
-            }
-
-            reference operator* () const {
-                return *this->_ptr;
-            }
-
-            pointer operator-> () const {
-                return this->_ptr;
-            }
-
-            reference operator[] (const size_type _offset) const {
-                return this->_data[_offset];
-            }
-        private:
-            pointer _ptr;
-        };
-
         array(std::initializer_list<value_type> _il) {
             assert(_il.size() < this->size() &&
                    "Too many elements in initializer list");
@@ -178,7 +182,7 @@ namespace s2 {
             return (this->begin() == this->end());
         }
 
-        constexpr size_type size() const noexcept {
+        size_type size() const noexcept {
             return N;
         }
 
