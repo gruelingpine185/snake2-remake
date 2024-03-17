@@ -42,7 +42,7 @@ namespace s2 {
     void snake::update(std::uint32_t _ticks) noexcept {}
 
     bool snake::render(SDL_Renderer* _renderer) noexcept {
-        if(SDL_SetRenderDrawColor(_renderer, 0xff, 0xff, 0x00, 0xff) < 0) {
+        if(SDL_SetRenderDrawColor(_renderer, 0xff, 0xc0, 0x00, 0xff) < 0) {
             return false;
         }
         for(int i= 0; i < this->_anchors.cap() - 1; i ++)
