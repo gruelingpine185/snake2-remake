@@ -65,5 +65,17 @@ namespace s2 {
 
             if(SDL_RenderFillRect(_renderer, &segment) == -1) return false;
         }
+
+        if(SDL_SetRenderDrawColor(_renderer, 0xff, 0xff, 0xff, 0xff) < 0) {
+            return false;
+        }
+
+        s2::pos<float> head_pos = scale_to_screen(this->_size,
+                                                  this->_anchors.front());
+        segment.x = head_pos.x();
+        segment.y = head_pos.y();
+        segment.w = this->_size.w();
+        segment.h = this->_size.h();
+        return (SDL_RenderFillRect(_renderer, &segment) == 0);
     }
 }
