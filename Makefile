@@ -30,7 +30,7 @@ sdl3:
 	cmake --build build && cmake --install build
 
 $(project): $(cpp_objects)
-	$(CXX) $(CXXFLAGS) -Wl,-rpath,/usr/local/lib $^ -o $@ -lSDL3
+	$(CXX) $(CXXFLAGS) $^ -o $@ $(shell pkg-config --libs sdl3)
 
 $(bin_dir)/%.o: $(src_dir)/%.cpp $(wildcard $(inc_dir)/%.h) $(bin_dir)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
