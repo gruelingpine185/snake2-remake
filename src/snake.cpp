@@ -1,4 +1,4 @@
-#include <iostream>
+#include <cmath>
 
 #include <SDL3/SDL_rect.h>
 #include <SDL3/SDL_render.h>
@@ -10,11 +10,12 @@
 namespace s2 {
     template <
         typename T,
-    typename = typename std::enable_if_t<std::is_arithmetic_v<T>>
-        >
-        static constexpr s2::size<T> dist_between(const s2::pos<T>& _l,
-                                                  const s2::pos<T>& _r) {
-        return s2::size<T>((_r.x() - _l.x()), (_r.y() - _l.y()));
+        typename = typename std::enable_if_t<std::is_arithmetic_v<T>>
+    >
+    static constexpr s2::size<T> dist_between(const s2::pos<T>& _l,
+                                              const s2::pos<T>& _r) {
+        return s2::size<T>(std::abs(_r.x() - _l.x()),
+                           std::abs(_r.y() - _l.y()));
     }
 
     template <
