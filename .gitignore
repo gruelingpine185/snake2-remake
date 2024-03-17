@@ -1,5 +1,6 @@
 # project
 bin/
+out/
 
 # bear
 .cache/
