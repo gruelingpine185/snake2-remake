@@ -16,16 +16,7 @@ namespace s2 {
                                                   const s2::pos<T>& _r) {
         return s2::size<T>((_r.x() - _l.x()), (_r.y() - _l.y()));
     }
-    
-    template <
-        typename T,
-    typename = typename std::enable_if_t<std::is_arithmetic_v<T>>
-        >
-        static constexpr bool axis_from_dist(const s2::size<T>& _size,
-                                             const s2::size<T>& _dist) {
-        return (_dist.w() >= _size.w());
-    }
-    
+
     template <
         typename T,
     typename = typename std::enable_if_t<std::is_arithmetic_v<T>>
@@ -34,7 +25,7 @@ namespace s2 {
                                                     const s2::pos<T>& _pos) {
         return s2::pos<T>(_pos.x() * _size.w(), _pos.y() * _size.h());
     }
-    
+
     snake::snake(const s2::size<float>& _size,
                  const s2::pos<float>& _pos,
                  const std::uint32_t _len,
@@ -43,24 +34,15 @@ namespace s2 {
     _vel(_vel){}
     
     snake::~snake() noexcept {}
-    
+
     void snake::handle_events(const SDL_Events& _events) noexcept {}
-    
+
     void snake::update(std::uint32_t _ticks) noexcept {}
-    
+
     bool snake::render(SDL_Renderer* _renderer) noexcept {
         if(SDL_SetRenderDrawColor(_renderer, 0xff, 0xff, 0x00, 0xff) < 0) {
             return false;
         }
-        
-        /*
-        for(auto a: this->_anchors) {
-            std::cout << a.x() << ", " << a.y() << std::endl;
-        }
-        std::cout << std::endl;
-        */
-        
-#if 1
         for(int i= 0; i < this->_anchors.cap() - 1; i ++)
         {
             s2::pos<float>  pos_cur = scale_to_screen(this->_size, this->_anchors[i]);
@@ -86,10 +68,6 @@ namespace s2 {
             //printf("%f %f %f %f\n", a.w, a.h, a.x, a.y);
             //std::cout <<  rect.y/this->_size.h() << std::endl;
         }
-        
-        //std::cout << std::endl;
-        
-#endif
         return true;
     }
 }
