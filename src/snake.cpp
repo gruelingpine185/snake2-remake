@@ -45,31 +45,25 @@ namespace s2 {
         if(SDL_SetRenderDrawColor(_renderer, 0xff, 0xc0, 0x00, 0xff) < 0) {
             return false;
         }
-        for(int i= 0; i < this->_anchors.cap() - 1; i ++)
-        {
-            s2::pos<float>  pos_cur = scale_to_screen(this->_size, this->_anchors[i]);
-            s2::pos<float> pos_next = scale_to_screen(this->_size, this->_anchors[i + 1]);
-            
-            SDL_FRect a;
-            
-            if(pos_cur.y() == pos_next.y())
-            {
-                a.h = this->_size.h();
-                a.w = abs(pos_cur.x() - pos_next.x());
+
+        SDL_FRect segment;
+        for(std::size_t i = 0; i < this->_anchors.cap() - 1; i++) {
+            s2::pos<float> curr_pos = scale_to_screen(this->_size,
+                                                      this->_anchors[i]);
+            s2::pos<float> next_pos = scale_to_screen(this->_size,
+                                                      this->_anchors[i + 1]);
+            s2::size size = dist_between(curr_pos, next_pos);
+            segment.x = curr_pos.x();
+            segment.y = curr_pos.y();
+            if(curr_pos.y() == next_pos.y()) {
+                segment.h = this->_size.h();
+                segment.w = size.w();
+            } else {
+                segment.h = size.h();
+                segment.w = this->_size.w();
             }
-            else 
-            {
-                a.h = abs(pos_cur.y() - pos_next.y());
-                a.w = this->_size.w();
-            }
-            a.x = pos_cur.x();
-            a.y = pos_cur.y();
-            
-            // sdl origin is top left.
-            SDL_RenderFillRect(_renderer, &a);
-            //printf("%f %f %f %f\n", a.w, a.h, a.x, a.y);
-            //std::cout <<  rect.y/this->_size.h() << std::endl;
+
+            if(SDL_RenderFillRect(_renderer, &segment) == -1) return false;
         }
-        return true;
     }
 }
