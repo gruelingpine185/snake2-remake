@@ -20,10 +20,10 @@ namespace s2 {
 
     template <
         typename T,
-    typename = typename std::enable_if_t<std::is_arithmetic_v<T>>
-        >
-        static constexpr s2::pos<T> scale_to_screen(const s2::size<T>& _size,
-                                                    const s2::pos<T>& _pos) {
+        typename = typename std::enable_if_t<std::is_arithmetic_v<T>>
+    >
+    static constexpr s2::pos<T> scale_to_screen(const s2::size<T>& _size,
+                                                const s2::pos<T>& _pos) {
         return s2::pos<T>(_pos.x() * _size.w(), _pos.y() * _size.h());
     }
 
@@ -31,9 +31,10 @@ namespace s2 {
                  const s2::pos<float>& _pos,
                  const std::uint32_t _len,
                  const float _vel) noexcept:
-    _anchors{_pos, {_pos.x(), _pos.y() + 3}, {_pos.x() + 3, _pos.y() + 3}}, _size(_size), _len(_len),
-    _vel(_vel){}
-    
+        _anchors{_pos, {_pos.x(), _pos.y() + 3}, {_pos.x() + 3, _pos.y() + 3},
+            {_pos.x() + 3, _pos.y() + 8}},
+        _size(_size), _len(_len), _vel(_vel) {}
+
     snake::~snake() noexcept {}
 
     void snake::handle_events(const SDL_Events& _events) noexcept {}
