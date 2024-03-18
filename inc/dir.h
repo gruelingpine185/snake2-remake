@@ -18,6 +18,15 @@ namespace s2 {
         x,
         y
     };
+
+
+    constexpr bool on_axis(const axis _axis, const dir _dir) {
+        if(_axis == s2::axis::x) {
+            return ((_dir == s2::dir::left) || (_dir == s2::dir::right));
+        }
+
+        return ((_dir == s2::dir::up) || (_dir == s2::dir::down));
+    }
 }
 
 #endif // S2_DIR_H
