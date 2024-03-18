@@ -10,7 +10,7 @@
 
 
 struct SDL_Renderer;
-union SDL_Events;
+union SDL_Event;
 
 
 namespace s2 {
@@ -25,7 +25,7 @@ namespace s2 {
               const float _vel = 1.0f) noexcept;
         ~snake() noexcept;
 
-        void handle_events(const SDL_Events& _events) noexcept;
+        void handle_events(const SDL_Event& _event) noexcept;
         void update(std::uint32_t _ticks) noexcept;
         bool render(SDL_Renderer* _renderer) noexcept;
     private:

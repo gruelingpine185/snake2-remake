@@ -60,7 +60,7 @@ namespace s2 {
 
     snake::~snake() noexcept {}
 
-    void snake::handle_events(const SDL_Events& _events) noexcept {}
+    void snake::handle_events(const SDL_Event& _event) noexcept {
 
     void snake::update(std::uint32_t _ticks) noexcept {}
 
