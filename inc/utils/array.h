@@ -172,7 +172,7 @@ namespace s2 {
         }
 
         reference back() noexcept {
-            return *std::prev(this->end());
+            return *(this->end() - 1);
         }
 
         const_reference back() const noexcept {
