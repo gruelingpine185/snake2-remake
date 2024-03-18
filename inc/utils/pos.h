@@ -63,7 +63,8 @@ namespace s2 {
         }
 
         constexpr pos& operator-= (const pos<T>& _pos) noexcept {
-            *this += -_pos;
+            this->_x -= _pos._x;
+            this->_y -= _pos._y;
             return *this;
         }
     private:
