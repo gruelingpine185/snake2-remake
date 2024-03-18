@@ -1,0 +1,57 @@
+cmake_minimum_required(VERSION 3.16)
+set(CMAKE_CXX_STANDARD 17)
+
+# ToDo: Test this on unix.
+
+# cd out
+# cmake .. -G "Ninja"
+# ninja
+
+# Note(oh-facts): For windows, sdl3 will not build with gcc (error: dxgidebug.h: No such file or directory) 
+# but builds perfectly with clang on my machine. I have no interest in exploring why.
+if(WIN32)
+    set(CMAKE_C_COMPILER "clang")
+    set(CMAKE_CXX_COMPILER "clang++")
+endif()
+
+project(snake2)
+
+#--------target--------#
+
+# On windows, uses sdl3 in vendor/sdl3. On Unix, looks for it in the default dir
+if(WIN32)
+    add_subdirectory(vendor/sdl3 EXCLUDE_FROM_ALL)
+endif()
+if(UNIX)
+    find_package(SDL3 EXCLUDE_FROM_ALL)
+endif()
+
+include_directories(
+    inc
+    inc/utils
+    vendor/sdl3/include
+    )
+
+
+set(src  "src/main.cpp" "src/snake.cpp" "src/window.cpp")
+
+add_executable(${PROJECT_NAME} ${src})
+
+target_link_libraries(${PROJECT_NAME} SDL3::SDL3)
+
+#----------commands----------#
+
+# copies dll to build directory. 
+if(WIN32)
+    add_custom_target(
+    	copy-dlls ALL
+    	${CMAKE_COMMAND} -E copy_if_different
+        ${CMAKE_BINARY_DIR}/vendor/sdl3/SDL3.dll
+        ${CMAKE_BINARY_DIR}
+    )
+
+
+    add_dependencies(copy-dlls ${PROJECT_NAME})
+endif()
+
+#----------------------------#
