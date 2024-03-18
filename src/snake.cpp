@@ -22,7 +22,7 @@ namespace s2 {
         typename T,
         typename = typename std::enable_if_t<std::is_arithmetic_v<T>>
     >
-    static constexpr s2::pos<T> scale_to_screen(const s2::size<T>& _size,
+    static constexpr s2::pos<T> scale_to_grid(const s2::size<T>& _size,
                                                 const s2::pos<T>& _pos) {
         return s2::pos<T>(_pos.x() * _size.w(), _pos.y() * _size.h());
     }
@@ -38,7 +38,7 @@ namespace s2 {
             return false;
         }
 
-        const s2::pos<float> head_pos = scale_to_screen(_size, _pos);
+        const s2::pos<float> head_pos = scale_to_grid(_size, _pos);
         const SDL_FRect segment = {
             head_pos.x(),
             head_pos.y(),
@@ -71,9 +71,9 @@ namespace s2 {
 
         SDL_FRect segment;
         for(std::size_t i = 0; i < this->_anchors.cap() - 1; i++) {
-            const s2::pos<float> curr_pos = scale_to_screen(this->_size,
+            const s2::pos<float> curr_pos = scale_to_grid(this->_size,
                                                             this->_anchors[i]);
-            const s2::pos<float> next_pos = scale_to_screen(this->_size,
+            const s2::pos<float> next_pos = scale_to_grid(this->_size,
                                                             this->_anchors[i + 1]);
             const s2::size size = dist_between(curr_pos, next_pos);
             segment.x = curr_pos.x();
