@@ -27,6 +27,29 @@ namespace s2 {
         return s2::pos<T>(_pos.x() * _size.w(), _pos.y() * _size.h());
     }
 
+    template <
+        typename T,
+        typename = typename std::enable_if_t<std::is_arithmetic_v<T>>
+    >
+    static bool snake_render_head(SDL_Renderer* _renderer,
+                                  const s2::size<T>& _size,
+                                  const s2::pos<T>& _pos) {
+        if(SDL_SetRenderDrawColor(_renderer, 0xff, 0xff, 0xff, 0xff) < 0) {
+            return false;
+        }
+
+        s2::pos<float> head_pos = scale_to_screen(_size, _pos);
+        SDL_FRect segment = {
+            head_pos.x(),
+            head_pos.y(),
+            _size.w(),
+            _size.h()
+        };
+
+        return (SDL_RenderFillRect(_renderer, &segment) == 0);
+    }
+
+
     snake::snake(const s2::size<float>& _size,
                  const s2::pos<float>& _pos,
                  const std::uint32_t _len,
@@ -66,16 +89,8 @@ namespace s2 {
             if(SDL_RenderFillRect(_renderer, &segment) == -1) return false;
         }
 
-        if(SDL_SetRenderDrawColor(_renderer, 0xff, 0xff, 0xff, 0xff) < 0) {
-            return false;
-        }
-
-        s2::pos<float> head_pos = scale_to_screen(this->_size,
-                                                  this->_anchors.front());
-        segment.x = head_pos.x();
-        segment.y = head_pos.y();
-        segment.w = this->_size.w();
-        segment.h = this->_size.h();
-        return (SDL_RenderFillRect(_renderer, &segment) == 0);
+        return snake_render_head(_renderer,
+                                 this->_size,
+                                 this->_anchors.front());
     }
 }
