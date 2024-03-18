@@ -38,8 +38,8 @@ namespace s2 {
             return false;
         }
 
-        s2::pos<float> head_pos = scale_to_screen(_size, _pos);
-        SDL_FRect segment = {
+        const s2::pos<float> head_pos = scale_to_screen(_size, _pos);
+        const SDL_FRect segment = {
             head_pos.x(),
             head_pos.y(),
             _size.w(),
@@ -71,11 +71,11 @@ namespace s2 {
 
         SDL_FRect segment;
         for(std::size_t i = 0; i < this->_anchors.cap() - 1; i++) {
-            s2::pos<float> curr_pos = scale_to_screen(this->_size,
-                                                      this->_anchors[i]);
-            s2::pos<float> next_pos = scale_to_screen(this->_size,
-                                                      this->_anchors[i + 1]);
-            s2::size size = dist_between(curr_pos, next_pos);
+            const s2::pos<float> curr_pos = scale_to_screen(this->_size,
+                                                            this->_anchors[i]);
+            const s2::pos<float> next_pos = scale_to_screen(this->_size,
+                                                            this->_anchors[i + 1]);
+            const s2::size size = dist_between(curr_pos, next_pos);
             segment.x = curr_pos.x();
             segment.y = curr_pos.y();
             if(curr_pos.y() == next_pos.y()) {
