@@ -26,7 +26,7 @@ namespace s2 {
         ~snake() noexcept;
 
         void handle_events(const SDL_Event& _event) noexcept;
-        void update(std::uint32_t _ticks) noexcept;
+        void update(const std::uint32_t _ticks) noexcept;
         bool render(SDL_Renderer* _renderer) noexcept;
     private:
         s2::array<s2::pos<float>, 32> _anchors;

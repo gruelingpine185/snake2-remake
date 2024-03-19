@@ -62,7 +62,9 @@ namespace s2 {
 
     void snake::handle_events(const SDL_Event& _event) noexcept {
 
-    void snake::update(std::uint32_t _ticks) noexcept {}
+    void snake::update(const std::uint32_t _ticks) noexcept {
+        if(_ticks % 16 != 0) return;
+    }
 
     bool snake::render(SDL_Renderer* _renderer) noexcept {
         if(SDL_SetRenderDrawColor(_renderer, 0xff, 0xc0, 0x00, 0xff) < 0) {
