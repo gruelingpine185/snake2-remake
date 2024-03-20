@@ -26,6 +26,31 @@ namespace s2 {
     snake::~snake() noexcept {}
 
     void snake::handle_events(const SDL_Event& _event) noexcept {
+        if(_event.type != SDL_EVENT_KEY_DOWN) return;
+
+        switch(_event.key.keysym.sym) {
+            case SDLK_UP:
+                if(on_axis(s2::axis::y, this->_dir)) break;
+
+                this->_dir = s2::dir::up;
+                break;
+            case SDLK_DOWN:
+                if(on_axis(s2::axis::y, this->_dir)) break;
+
+                this->_dir = s2::dir::down;
+               break;
+            case SDLK_LEFT:
+                if(on_axis(s2::axis::x, this->_dir)) break;
+
+                this->_dir = s2::dir::left;            
+                break;
+            case SDLK_RIGHT:
+                if(on_axis(s2::axis::x, this->_dir)) break;
+
+                this->_dir = s2::dir::right;
+                break;
+        }
+    }
 
     void snake::update(const std::uint32_t _ticks) noexcept {
         if(_ticks % 16 != 0) return;

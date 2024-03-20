@@ -29,6 +29,7 @@ namespace s2 {
         bool render(SDL_Renderer* _renderer) noexcept;
     private:
         s2::size<float> _size;
+        dir _dir;
         std::uint32_t _len;
     };
 }
