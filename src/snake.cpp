@@ -84,7 +84,25 @@ namespace s2 {
             return false;
         }
 
+        SDL_FRect rect;
+        rect.w = this->_size.w();
+        rect.h = this->_size.h();
+
+        for(std::vector<s2::pos<float>>::iterator iter = this->_body.begin();
+            iter != this->_body.end() - 1; iter++) {
+            rect.x = iter->x();
+            rect.y = iter->y();
+            if(SDL_RenderFillRect(_renderer, &rect) < 0) return false;
         }
 
+        if(SDL_SetRenderDrawColor(_renderer, 0xff, 0xff, 0xff, 0xff) < 0) {
+            return false;
+        }
+
+        rect.x = this->_body.back().x();
+        rect.y = this->_body.back().y();
+        if(SDL_RenderFillRect(_renderer, &rect) < 0) return false;
+
+        return true;
     }
 }
