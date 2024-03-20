@@ -4,6 +4,7 @@
 #include <SDL3/SDL_render.h>
 #include <SDL3/SDL_events.h>
 
+#include "dir.h"
 #include "snake.h"
 
 
@@ -54,6 +55,28 @@ namespace s2 {
 
     void snake::update(const std::uint32_t _ticks) noexcept {
         if(_ticks % 16 != 0) return;
+        if(this->_body.size() < this->_len) {
+            this->_body.push_back(this->_body.front());
+        }
+
+        s2::pos<float> head = this->_body.back();
+        std::rotate(this->_body.begin(), this->_body.begin() + 1, this->_body.end());
+        switch(this->_dir) {
+            case s2::dir::up:
+                head -= scale_to_grid(this->_size, {0, 1});
+                break;
+            case s2::dir::down:
+                head += scale_to_grid(this->_size, {0, 1});
+                break;
+            case s2::dir::left:
+                head -= scale_to_grid(this->_size, {1, 0});
+                break;
+            case s2::dir::right:
+                head += scale_to_grid(this->_size, {1, 0});
+                break;
+        }
+
+        this->_body.back() = head;
     }
 
     bool snake::render(SDL_Renderer* _renderer) noexcept {

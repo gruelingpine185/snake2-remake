@@ -3,6 +3,7 @@
 
 
 #include <cstdint>
+#include <vector>
 
 #include "utils/size.h"
 #include "utils/pos.h"
@@ -28,6 +29,7 @@ namespace s2 {
         void update(const std::uint32_t _ticks) noexcept;
         bool render(SDL_Renderer* _renderer) noexcept;
     private:
+        std::vector<s2::pos<float>> _body;
         s2::size<float> _size;
         dir _dir;
         std::uint32_t _len;
