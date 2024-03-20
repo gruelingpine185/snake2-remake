@@ -18,16 +18,16 @@ namespace s2 {
     public:
         using value_type = T;
     public:
-        constexpr size(const value_type _w, const value_type _h) noexcept:
+        size(const value_type _w, const value_type _h) noexcept:
             _w(_w), _h(_h) {}
 
-        constexpr size(const value_type _n) noexcept:
+        size(const value_type _n) noexcept:
             _w(_n), _h(_n) {}
 
-        constexpr size(const size& _size) noexcept:
+        size(const size& _size) noexcept:
             _w(_size._w), _h(_size._h) {}
 
-        constexpr size() noexcept {}
+        size() noexcept {}
 
         ~size() noexcept {}
 
@@ -47,7 +47,7 @@ namespace s2 {
             return this->_h;
         }
 
-        constexpr size& operator= (const size<T>& _size) noexcept {
+        size& operator= (const size<T>& _size) noexcept {
             if(*this == _size) return *this;
 
             this->_w = _size.w();
@@ -55,18 +55,18 @@ namespace s2 {
             return *this;
         }
 
-        constexpr size& operator+= (const size<T>& _size) noexcept {
+        size& operator+= (const size<T>& _size) noexcept {
             this->_w += _size._w;
             this->_h += _size._h;
             return *this;
         }
 
-        constexpr size& operator-= (const size<T>& _size) noexcept {
+        size& operator-= (const size<T>& _size) noexcept {
             *this += -_size;
             return *this;
         }
 
-        constexpr size& operator*= (const size<T>& _size) noexcept {
+        size& operator*= (const size<T>& _size) noexcept {
             this->_w *= _size._h;
             this->_h *= _size._h;
             return *this;
