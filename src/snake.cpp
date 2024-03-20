@@ -20,9 +20,10 @@ namespace s2 {
 
     snake::snake(const s2::size<float>& _size,
                  const s2::pos<float>& _pos,
-                 const s2::dir _dir) noexcept:
+                 const s2::dir _dir,
+                 const std::uint32_t _len) noexcept:
         _body{_pos}, _size(_size), _dir(_dir),
-        _len(3) {}
+        _len(_len) {}
 
     snake::~snake() noexcept {}
 

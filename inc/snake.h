@@ -22,7 +22,8 @@ namespace s2 {
     public:
         snake(const s2::size<float>& _size,
               const s2::pos<float>& _pos,
-              const s2::dir _dir) noexcept;
+              const s2::dir _dir,
+              const std::uint32_t _len = 4) noexcept;
         ~snake() noexcept;
 
         void handle_events(const SDL_Event& _event) noexcept;
