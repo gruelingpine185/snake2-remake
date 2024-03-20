@@ -6,7 +6,6 @@
 
 #include "utils/size.h"
 #include "utils/pos.h"
-#include "utils/array.h"
 
 
 struct SDL_Renderer;
@@ -29,7 +28,6 @@ namespace s2 {
         void update(const std::uint32_t _ticks) noexcept;
         bool render(SDL_Renderer* _renderer) noexcept;
     private:
-        s2::array<s2::pos<float>, 32> _anchors;
         s2::size<float> _size;
         std::uint32_t _len;
         float _vel;

@@ -3,7 +3,6 @@
 #include <SDL3/SDL.h>
 
 #include "window.h"
-#include "utils/array.h"
 #include "snake.h"
 
 

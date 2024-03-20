@@ -71,28 +71,7 @@ namespace s2 {
             return false;
         }
 
-        SDL_FRect segment;
-        for(std::size_t i = 0; i < this->_anchors.cap() - 1; i++) {
-            const s2::pos<float> curr_pos = scale_to_grid(this->_size,
-                                                            this->_anchors[i]);
-            const s2::pos<float> next_pos = scale_to_grid(this->_size,
-                                                            this->_anchors[i + 1]);
-            const s2::size size = dist_between(curr_pos, next_pos);
-            segment.x = curr_pos.x();
-            segment.y = curr_pos.y();
-            if(curr_pos.y() == next_pos.y()) {
-                segment.h = this->_size.h();
-                segment.w = size.w();
-            } else {
-                segment.h = size.h();
-                segment.w = this->_size.w();
-            }
-
-            if(SDL_RenderFillRect(_renderer, &segment) == -1) return false;
         }
 
-        return snake_render_head(_renderer,
-                                 this->_size,
-                                 this->_anchors.front());
     }
 }
