@@ -14,14 +14,14 @@ union SDL_Event;
 
 namespace s2 {
     class snake;
+    enum class dir;
 
 
     class snake {
     public:
         snake(const s2::size<float>& _size,
               const s2::pos<float>& _pos,
-              const std::uint32_t _len = 3.0f,
-              const float _vel = 1.0f) noexcept;
+              const s2::dir _dir) noexcept;
         ~snake() noexcept;
 
         void handle_events(const SDL_Event& _event) noexcept;
@@ -30,7 +30,6 @@ namespace s2 {
     private:
         s2::size<float> _size;
         std::uint32_t _len;
-        float _vel;
     };
 }
 
